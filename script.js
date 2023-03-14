@@ -3,11 +3,7 @@ let linhas = colunasTh = colunasTd = ""
 let numCol = 2
 let numRow = 1
 let soma = media = 0
-let nota1 = document.querySelector(".nota1")
-let nota2 = document.querySelector(".nota2")
-let nota3 = document.querySelector(".nota3")
-let nota4 = document.querySelector(".nota4")
-let trs= document.querySelectorAll("tr")
+let trs = document.querySelectorAll("tr")
 
 // renderiza tabela
 function criaTable() {
@@ -20,13 +16,13 @@ function criaTable() {
             <th>Media</th>
             <th>Situação</th>
         </tr>
-        <tr id="row1">
-            <td><input type="text" value="Nome do Aluno"></td>
-            <td><input onchange="calcMedia(1)" type="number"></td>
-            <td><input onchange="calcMedia(1)" type="number"></td>
+        <tr id="row0">
+            <td><input type="text" placeholder="Nome do Aluno"></td>
+            <td><input onchange="calcMedia()" type="number" class="n1"></td>
+            <td><input onchange="calcMedia()" type="number" class="n2"></td>
             ${colunasTd}
             <td class="media m1"><p>vazio</p></td>
-            <td class="situ s1"></h2></td>
+            <td class="situ s1"></td>
         </tr>    
         ${linhas}
         `
@@ -50,11 +46,12 @@ function adColumn() {
         colunasTh += "<th class='quantNotas'>Nota " + numCol + "</th>"
 
         colunasTd += `
-            <td><input onchange="calcMedia(${numRow})" type="number" value="0"></td>
+            <td><input onchange="calcMedia()" type="number" class="n${numCol}"></td>
         `
     } else {
         alert("Numero máximo de colunas atingida!")
     }
+
 
     rendLinha()
     criaTable()
@@ -65,10 +62,10 @@ function rendLinha() {
     linhas = ""
 
     for (let x = 1; x < numRow; x++) {
-        linhas += `<tr id="row${x+1}">
-                        <td><input type="text" value="Jão"></td>
-                        <td><input onchange="calcMedia(${x+1})" type="number"></td>
-                        <td><input onchange="calcMedia(${x+1})" type="number"></td>
+        linhas += `<tr id="row${x}">
+                        <td><input type="text" placeholder="Nome do Aluno"></td>
+                        <td><input onchange="calcMedia()" type="number" class="n1"></td>
+                        <td><input onchange="calcMedia()" type="number" class="n2"></td>
                         ${colunasTd}
                         <td class="media m${x + 1}"><p>vazio</p></td>
                         <td class="situ s${x + 1}"></h2></td>
@@ -81,18 +78,32 @@ function rendLinha() {
 }
 
 // calcular media
-function calcMedia(e) {
-    if(e == 1){
-        let row = document.querySelectorAll("#row"+1+"input")
-        
-        for (let i = 0; i < row.length; i++) {
-            soma += row[i].value
+function calcMedia() {
+    // os loop precisam começar do 1 porque se tentar extrair valor de um lugar que nao existe dara erro e todo o resto nao funcionada
+    for (let i = 0; i < numRow; i++) {
+        // as classes das notas começao do n1, por isso precisam começar do x = 1
+        for (let x = 1; x < numCol + 1; x++) {
+            // soma = parseInt(row[i].value)
+            soma += parseInt(document.querySelector(`#row${i} .n${x}`).value)
         }
+        
+        document.querySelector(`.m${i + 1} p`).innerHTML = soma/numCol
 
-    }
-    
-    media = soma / numRow
+        if((soma/numCol) >= 70){
+            document.querySelector(`.s${i+1}`).innerHTML = `
+                <h2 style="color: greenyellow">APROVADO</h2>
+            `
+        }else if((soma/numCol) <= 69 && (soma/numCol) >= 50){
+            document.querySelector(`.s${i+1}`).innerHTML = `
+                <h2 style="color: yellow">RECUPERAÇÃO</h2>
+            `
+        }else{
+            document.querySelector(`.s${i+1}`).innerHTML = `
+                <h2 style="color: red">REPROVADO</h2>
+            `
+        }
+        soma = 0
+    } 
 
-    document.title = soma
-    document.querySelector(".media p").innerHTML = media
+
 }
