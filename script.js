@@ -86,24 +86,34 @@ function calcMedia() {
             // soma = parseInt(row[i].value)
             soma += parseInt(document.querySelector(`#row${i} .n${x}`).value)
         }
-        
-        document.querySelector(`.m${i + 1} p`).innerHTML = soma/numCol
 
-        if((soma/numCol) >= 70){
-            document.querySelector(`.s${i+1}`).innerHTML = `
+        if (isNaN(document.querySelector(`.m${i + 1} p`).innerHTML = soma / numCol)) {
+            document.querySelector(`.m${i + 1} p`).innerHTML = "calculando..."
+        } else {
+            if ((document.querySelector(`.m${i + 1} p`).innerHTML = soma / numCol) > 100) {
+                alert("Alguma das notas são maiores do que 100, revise as notas!")
+            } else {
+                document.querySelector(`.m${i + 1} p`).innerHTML = soma / numCol
+
+                if ((soma / numCol) >= 70) {
+                    document.querySelector(`.s${i + 1}`).innerHTML = `
                 <h2 style="color: greenyellow">APROVADO</h2>
             `
-        }else if((soma/numCol) <= 69 && (soma/numCol) >= 50){
-            document.querySelector(`.s${i+1}`).innerHTML = `
+                } else if ((soma / numCol) <= 69 && (soma / numCol) >= 50) {
+                    document.querySelector(`.s${i + 1}`).innerHTML = `
                 <h2 style="color: yellow">RECUPERAÇÃO</h2>
             `
-        }else{
-            document.querySelector(`.s${i+1}`).innerHTML = `
+                } else {
+                    document.querySelector(`.s${i + 1}`).innerHTML = `
                 <h2 style="color: red">REPROVADO</h2>
             `
+                }
+            }
         }
+
+
         soma = 0
-    } 
+    }
 
 
 }

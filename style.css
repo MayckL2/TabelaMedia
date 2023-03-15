@@ -2,21 +2,34 @@
     font-family: sans-serif;
 }
 body{
-    background-color: purple;
+    background-color: blue;
+    /* background-image: radial-gradient(black, purple);
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-attachment: fixed; */
     color: white;
+    padding: 20px;
 }
-
+.logo{
+    top: -40px;
+    width: 150px;
+    position: absolute;
+    z-index: -1;
+}
 h1{
     margin: 0 auto;
     width: fit-content;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    color: black;
+    text-shadow: 3px 4px 0px aqua;
 }
 
 table{
     border: outset;
     padding: 10px;
-    border-radius: 20px;
     margin: 20px;
+    box-shadow: 10px 10px 0px aqua;
+    margin: 0 auto;
 }
 table *{
     text-align: center;
@@ -24,11 +37,48 @@ table *{
 .media, .situ{
     width: 100px;
 }
-button{
-    padding: 5px 15px;
-    cursor: pointer;
+input{
+    padding: 5px;
+    border: outset white;
+    background-color: transparent;
+    color: white;
+    margin: 0px 10px;
+    width: 100px;
     transition: all 0.5s;
 }
+input:focus{
+    outline: none;
+    box-shadow: 5px 5px 0px aqua;
+}
+input::placeholder{
+    color: white;
+    opacity: 0.6;
+}
+button{
+    padding: 5px 0px;
+    width: 200px;
+    cursor: pointer;
+    transition: all 0.5s;
+    border: solid aqua;
+    background-color: transparent;
+    color: aqua;
+    display: block;
+    margin: 10px;
+}
 button:hover{
-    opacity: 0.8;
+    margin-left: 20px;
+    box-shadow: 5px 5px 0px aqua;
+}
+
+footer{
+    border-top: solid;
+    width: 90%;
+    position: absolute;
+    bottom: 0px;
+    padding: 10px;
+    text-align: center;
+}
+footer a{
+    text-decoration: none;
+    color: aqua;
 }
