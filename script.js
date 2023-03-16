@@ -2,8 +2,9 @@ let table = document.querySelector("table")
 let linhas = colunasTh = colunasTd = ""
 let numCol = 2
 let numRow = 1
-let soma = media = 0
+let soma = 0
 let trs = document.querySelectorAll("tr")
+let media = document.querySelectorAll(".media")
 
 // renderiza tabela
 function criaTable() {
@@ -21,11 +22,12 @@ function criaTable() {
             <td><input onchange="calcMedia()" type="number" class="n1"></td>
             <td><input onchange="calcMedia()" type="number" class="n2"></td>
             ${colunasTd}
-            <td class="media m1"><p>vazio</p></td>
+            <td class="m1"><p class="media">vazio</p></td>
             <td class="situ s1"></td>
         </tr>    
         ${linhas}
         `
+
 }
 
 // adiciona linhas
@@ -67,7 +69,7 @@ function rendLinha() {
                         <td><input onchange="calcMedia()" type="number" class="n1"></td>
                         <td><input onchange="calcMedia()" type="number" class="n2"></td>
                         ${colunasTd}
-                        <td class="media m${x + 1}"><p>vazio</p></td>
+                        <td class="m${x + 1}"><p class="media">vazio</p></td>
                         <td class="situ s${x + 1}"></h2></td>
                     </tr>
                     `
@@ -93,13 +95,13 @@ function calcMedia() {
             if ((document.querySelector(`.m${i + 1} p`).innerHTML = soma / numCol) > 100) {
                 alert("Alguma das notas são maiores do que 100, revise as notas!")
             } else {
-                document.querySelector(`.m${i + 1} p`).innerHTML = soma / numCol
-
+                document.querySelector(`.m${i + 1} p`).innerHTML = (soma / numCol).toFixed(2)
+                
                 if ((soma / numCol) >= 70) {
                     document.querySelector(`.s${i + 1}`).innerHTML = `
                 <h2 style="color: greenyellow">APROVADO</h2>
             `
-                } else if ((soma / numCol) <= 69 && (soma / numCol) >= 50) {
+                } else if ((soma / numCol) < 70 && (soma / numCol) > 50) {
                     document.querySelector(`.s${i + 1}`).innerHTML = `
                 <h2 style="color: yellow">RECUPERAÇÃO</h2>
             `
@@ -111,9 +113,19 @@ function calcMedia() {
             }
         }
 
-
         soma = 0
     }
 
-
 }
+
+// calcula media geral dos alunos
+// function mediaGeral(){
+//     let result = 0
+//     for (let i = 0; i < media.length; i++) {
+//         result += parseFloat(media[0].value)
+//     }
+
+//     document.title = numRow
+//     document.querySelector("#Mgeral").innerHTML = result
+
+// }
