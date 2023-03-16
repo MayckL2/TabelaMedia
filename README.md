@@ -1,5 +1,4 @@
 <h1 align="center">Tabela de Médias</h1>
-![Screenshot 2023-03-16 at 15-24-17 Tabela Media]()
 
 <img src="https://user-images.githubusercontent.com/103364944/225717400-ac25c49c-0a30-459a-a5c5-8781878edf5b.png">
 
